@@ -52,7 +52,14 @@ uri = URI(url)
 response = Net::HTTP.get(uri)
 dog_breeds = JSON.parse(response)
 
-pp dog_breeds
+dog_breeds['message'].each do |breed, sub_breeds|
+  puts "* #{breed.capitalize}"
+  if sub_breeds.any?
+    sub_breeds.each do |sub_breed|
+      puts "  * #{sub_breed.capitalize}"
+    end
+  end
+end
 
 # 4) Using data from the city's open data set figure out how many of our trees may die now that the Emerald Ash Borer has been found here. In other words, how many Ash trees do we have in the city?
 
